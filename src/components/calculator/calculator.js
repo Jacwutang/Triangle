@@ -25,6 +25,8 @@ class Calculator extends Component {
   calculate() {
     const {side_one, side_two, side_three} = this.state;
 
+    if(!side_one || !side_two || !side_three) return "";
+
     if(side_one === side_two && side_one === side_three) {
       return 'Equilateral';
     }
