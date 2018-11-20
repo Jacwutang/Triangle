@@ -6,9 +6,9 @@ import Calculator from "../calculator/calculator";
 class App extends Component {
   render() {
     return (
-      <div className="app">
-      <h1> Triangle </h1>
-      <Calculator />
+      <div className="app-container">
+        <h1> Triangle </h1>
+        <Calculator />
       </div>
     );
   }
