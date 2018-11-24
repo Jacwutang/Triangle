@@ -1,4 +1,4 @@
-/* Returns an error message if invalid side */
+/* Returns an error message if input is invalid */
 export const validateSide = side => {
   /* Filter NaN types */
   if (isNaN(side)) {
@@ -20,6 +20,7 @@ export const validateSide = side => {
   }
 };
 
+/* Returns whether or not all sides are valid */
 export const validateAllSides = (...sides) => {
-  return sides.every(side => parseFloat(side) > 0 && !isNaN(parseFloat(side)));
+  return sides.every(side => side > 0 && !isNaN(side));
 };
