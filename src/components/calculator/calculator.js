@@ -46,6 +46,7 @@ class Calculator extends Component {
         <input
           type="text"
           name="side_one"
+          pattern="[0-9]*"
           value={this.state.side_one}
           onChange={this.handleChange}
           placeholder="Side 1"
@@ -53,6 +54,7 @@ class Calculator extends Component {
         <input
           type="text"
           name="side_two"
+          pattern="[0-9]*"
           value={this.state.side_two}
           onChange={this.handleChange}
           placeholder="Side 2"
@@ -60,6 +62,7 @@ class Calculator extends Component {
         <input
           type="text"
           name="side_three"
+          pattern="[0-9]*"
           value={this.state.side_three}
           onChange={this.handleChange}
           placeholder="Side 3"
