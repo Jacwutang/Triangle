@@ -16,8 +16,11 @@ class Calculator extends Component {
 
   handleChange(event) {
     let type = event.target.name;
+    let val = event.target.validity.valid
+      ? event.target.value
+      : this.state[type];
     this.setState({
-      [type]: event.target.value
+      [type]: val
     });
   }
 
