@@ -23,6 +23,7 @@ class Calculator extends Component {
   }
 
   calculate() {
+
     let { side_one, side_two, side_three } = this.state;
     side_one = parseFloat(side_one);
     side_two = parseFloat(side_two);
@@ -54,6 +55,7 @@ class Calculator extends Component {
   }
 
   render() {
+    
     const { side_one, side_two, side_three } = this.state;
     return (
       <div className="calc_container">
@@ -111,7 +113,7 @@ class Calculator extends Component {
             {validateAllSides(
               parseFloat(side_one),
               parseFloat(side_two),
-              parseFloat(side_three) === true
+              parseFloat(side_three)
             ) ? (
               <mark> {this.calculate()} </mark>
             ) : (
