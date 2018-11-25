@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./calculator.css";
-import { validateSide, validateAllSides } from "./util/validation";
+import { validateSide, validateAllSides, determineType } from "./util/validation";
 class Calculator extends Component {
   constructor(props) {
     super(props);
@@ -9,12 +9,11 @@ class Calculator extends Component {
       side_two: "",
       side_three: ""
     };
-
     this.handleChange = this.handleChange.bind(this);
   }
 
+  /* Determine corresponding input to update w/ value */
   handleChange(event) {
-    /* Determine corresponding side to update w/ proposed value */
     let side = event.target.name;
     let val = event.target.value;
     this.setState({
@@ -22,41 +21,29 @@ class Calculator extends Component {
     });
   }
 
+  /* Calls utility methods */
   calculate() {
-
     let { side_one, side_two, side_three } = this.state;
     side_one = parseFloat(side_one);
     side_two = parseFloat(side_two);
     side_three = parseFloat(side_three);
 
-    if (
-      side_one > side_two + side_three ||
-      side_two > side_one + side_three ||
-      side_three > side_one + side_two
-    ) {
-      return "Not Possible";
-    } else if (side_one === side_two && side_one === side_three) {
-      return "Equilateral";
-    } else if (
-      side_one === side_two ||
-      side_one === side_three ||
-      side_two === side_three
-    ) {
-      return "Isoceles";
-    } else {
-      return "Scalene";
+    /* Proceed to calculation only when all sides are valid inputs */
+    if(validateAllSides(side_one, side_two, side_three)) {
+      return determineType(side_one, side_two, side_three);
+    }
+    else {
+      return "";
     }
   }
 
-  /* Render validation errors. Default is "" */
+  /* Render validation errors */
   renderErrors(side) {
-    let error = side ? validateSide(this.state[side]) : "";
-    return error;
+    let error_msg = side ? validateSide(this.state[side]).error : "";
+    return error_msg;
   }
 
   render() {
-    
-    const { side_one, side_two, side_three } = this.state;
     return (
       <div className="calc_container">
         <div className="inputs_container">
@@ -108,17 +95,8 @@ class Calculator extends Component {
 
         <div className="results_container">
           <h2>
-            {" "}
             The Triangle is:
-            {validateAllSides(
-              parseFloat(side_one),
-              parseFloat(side_two),
-              parseFloat(side_three)
-            ) ? (
-              <mark> {this.calculate()} </mark>
-            ) : (
-              ""
-            )}
+            <mark> {this.calculate()} </mark>
           </h2>
         </div>
       </div>
